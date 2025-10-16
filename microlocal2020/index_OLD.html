@@ -1,0 +1,248 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel='stylesheet' href='js/fullcalendar.css' />
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.min.css" />
+		<script src='js/lib/jquery.min.js'></script>
+		<script src='js/jquery.qtip.min.js'></script>
+		<script src='js/lib/moment.min.js'></script>
+		<script src='js/fullcalendar.js'></script>
+		<script src='js/gcal.js'></script>
+		<script src='js/colors.js'></script>
+		<script type='text/javascript' src='js/data.js'></script>
+
+		<script type='text/javascript'>
+		$(function() {
+			var data_seminars = data;
+
+			var colors = generateColor('#ed7474','#74c9ed', data_seminars.length);
+
+			var seminars = [];
+			for (var i = 0; i <= data_seminars.length - 1; i++) {
+				seminars.push({
+					googleCalendarId: data_seminars[i].gcal,
+					editable: false,
+					id: i,
+					color: colors[i]
+				})
+			};
+
+			$('#calendar').fullCalendar({
+				googleCalendarApiKey: 'AIzaSyDt0H-J3Xb8acqtNdg9DDQW-0F0gI-5wqU',
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,listMonth'
+				},
+				weekends: false,
+				businessHours: true,
+				fixedWeekCount: false,
+				eventSources: seminars,
+				eventClick: function(event) {
+					if (event.url) {
+					  return false;
+					}
+				},
+				eventRender: function(event, element) {
+					element.qtip({
+						content: {
+							text: event.description + '<br><br>' + ' Location: '.bold() + event.location
+						},
+			        	hide: {
+			            	fixed: true,
+			            	delay: 300
+			        	},
+						style: {
+			            	classes: 'qtip-bootstrap qtip-font',
+				        }
+					});
+				}
+			});
+
+			for (var i = 0; i <= data_seminars.length - 1; i++) {
+				$('#legend_list').append("<li style='background-color:"+colors[i]+"'><input class='box' type='checkbox' checked='checked' id=box_"+i+"><a href=#calendar class='seminar show' id="+i+" style='text-decoration:none; color:black'>"+data_seminars[i].name+"</a></li>");
+			}
+
+			$('.seminar').click(function(){
+				if($(this).hasClass('show')){
+					$('#calendar').fullCalendar('removeEventSource',seminars[$(this).attr('id')]);
+					$(this).removeClass('show');
+					$(this).prev().prop('checked',false);
+				}
+				else{
+					$('#calendar').fullCalendar('addEventSource',seminars[$(this).attr('id')]);
+					$(this).addClass('show');
+					$(this).prev().prop('checked',true);
+				}
+			});
+
+
+			$('.box').click(function(){
+				var seminar_id = $(this).attr('id').substring(4);
+				if($(this).is(':checked')){
+					$('#calendar').fullCalendar('addEventSource',seminars[seminar_id]);
+				}
+				else{
+					$('#calendar').fullCalendar('removeEventSource',seminars[seminar_id]);
+
+				}
+			});	
+		});
+		</script>
+		
+		<style>
+		  html, body {
+			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+			font-size: 14;
+		  }
+		  #container {
+		  	padding:5%;
+		  }	
+		  #calendar {
+		  	width: 75%;
+		  	max-height: 5%;
+		  }
+		  #legend {
+		  	float: right;
+		  }
+		  #legend ul{
+		  	list-style: none;
+		  }
+		  #legend li{
+		  	padding: 3px;
+		  	margin: 2px;
+		  	border-radius: 4px;
+		  }
+		  .qtip-font { font-size: 12; }
+
+		</style>
+<style>
+.borderexample
+{
+border-style:solid;
+border-color:#287EC7;
+}
+
+.borderfull
+{
+border-style:none;
+background-color: #5DADE2;
+}
+</style>
+</head>
+<body>
+<br>
+
+<h1 align="center" class="borderexample">Workshop on Microlocal analysis and PDEs</h1>
+
+<h4 align="center">Department of Mathematics, University College London</h4>
+<h4 align="center">TBD</h4>
+
+<h2 align="center"><font color="red">THE WORKSHOP IS POSTPONED</font></h2>
+
+<font color="red">Following the latest advice issued by UCL in face of the coronavirus outbreak, the event is postponed. We apologise for any inconvenience this may cause.<br><br></font>
+
+<p>
+This workshop is devoted to recent trends and developments in microlocal analysis and partial differential equations (PDEs). We hope that our workshop will give an opportunity for different communities working in micolocal analysis to come together, share ideas and establish new collaborations.
+
+<br>
+<br>
+<i>Funded by the <a href="https://www.lms.ac.uk">London Mathematical Society</a> (Research Grant - Scheme 1) and the <a href="https://www.ucl.ac.uk/maths/">UCL Department of Mathematics</a>.</i>
+</p>
+
+
+<hr>
+<div style="float: left; width: 20%;">
+<ul id="custmolist">
+<li><a href="#speakers">Invited speakers</a> </li>
+</ul>
+</div>
+<div style="float: left; width: 20%;">
+<ul id="custmolist">
+<li><a href="#schedule">Schedule</a> </li>
+</ul>
+</div>
+<div style="float: left; width: 20%;">
+<ul>
+<li><a href="#registration">Registration</a></li>
+</ul>
+</div>
+<div style="float: left; width: 20%;">
+<ul>
+<li><a href="#organisers">Organisers</a> </li>
+</ul>
+</div>
+<div style="float: left; width: 20%;">
+<ul>
+<li><a href="#travelinfo">Travel information</a></li>
+</ul>
+</div>
+<hr>
+<h2><a name="speakers"></a>Invited speakers</h2>
+<ul>
+<li>Yaiza Canzani (UNC Chapel Hill)		</li> 
+<li>Sandro Coriasco (Torino) 			</li>
+<li>Jonathan Eckhardt (Loughborough)		</li>  
+<li>Serena Federico (Ghent)			</li> 
+<li>Katya Krupchyk (Irvine)			</li>
+<li>Etienne Le Masson (Cergy-Pontoise)		</li>
+<li>Alberto Parmeggiani (Bologna)		</li> 
+<li>Julie Rowlett (Chalmers)			</li> 
+<li>Michael Ruzhansky* (Ghent)			</li> 
+<li>Micha&lstrok; Wrochna (Cergy-Pontoise)	</li>
+<li>Jared Wunsch (Northwestern)			</li>
+</ul>	
+
+<i>Public Lecture</i>: Carola-Bibiane Sch&ouml;nlieb (Cambridge)
+<br>
+<br>
+
+*TBC
+
+<!--
+
+<h2><a name="schedule"></a>Schedule</h2>
+
+The workshop will start on Wednesday 29 April 2020 at 10 AM and will end on Friday 1 May 2020 by 5 PM. 
+<br>
+<br>
+The social dinner will take place on Thursday 30 April 2020. Further details will follow closer to date.
+
+<h2><a name="registration"></a>Registration and funding</h2>
+
+Please register online by following <a href="https://onlinestore.ucl.ac.uk/conferences-and-events/faculty-of-mathematical-physical-sciences-c06/mathematics-f59/f59-workshop-on-microlocal-analysis-pdes">this link</a>. We ask for a small registration fee of &#163;30.<br>
+<br>
+We have a few slots for contributed talks. Please indicate in the registration form if you would like to contribute a talk, providing a provisional title and abstract. Alternatively, you can email these to Dima Vassiliev (d.vassiliev@ucl.ac.uk). A decision will be made in the beginning of March 2020.
+<br>
+<br>
+Limited funds are available to support the participation of junior researchers (PhD students and postdocs) and to cover caring costs of participants. If you would like to apply for these funds, please email Dima Vassiliev (d.vassiliev@ucl.ac.uk).
+<br>
+<h4>Deadlines:</h4>
+<ul>
+<li>Registration - 10 April 2020</li>
+<li>Contributed talks - 29 February 2020</li>
+<li>Financial support - 29 February 2020</li>
+</ul>
+
+-->
+
+<h2><a name="organisers"></a>Organisers</h2>
+
+<a href="http://www.ucl.ac.uk/~ucahmca/">Matteo Capoferri</a> (UCL) <br>
+<a href="https://www.lboro.ac.uk/departments/maths/staff/academic/claudia-garetto/">Claudia Garetto</a> (Loughborough) <br>
+<a href="http://www.ucl.ac.uk/~ucahdva/">Dima Vassiliev</a> (UCL) <br>
+<br>
+
+Please feel free to email Dima Vassiliev (d.vassiliev@ucl.ac.uk), should you have any question or require assistance.
+
+<h2><a name="travelinfo"></a>Travel information</h2>
+
+<a href="https://www.ucl.ac.uk/maths/contact/how-find-us">How to reach the UCL Department of Mathematics</a>
+
+<br>
+<br> 
+<hr>
+
+<p class="bottom-three">
+</p>
+
+
+</body></html>

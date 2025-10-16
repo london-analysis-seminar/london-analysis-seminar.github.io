@@ -1,0 +1,386 @@
+ <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel='stylesheet' href='js/fullcalendar.css' />
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.min.css" />
+		<script src='js/lib/jquery.min.js'></script>
+		<script src='js/jquery.qtip.min.js'></script>
+		<script src='js/lib/moment.min.js'></script>
+		<script src='js/fullcalendar.js'></script>
+		<script src='js/gcal.js'></script>
+		<script src='js/colors.js'></script>
+		<script type='text/javascript' src='js/data.js'></script>
+
+		<script type='text/javascript'>
+		$(function() {
+			var data_seminars = data;
+
+			var colors = generateColor('#ed7474','#74c9ed', data_seminars.length);
+
+			var seminars = [];
+			for (var i = 0; i <= data_seminars.length - 1; i++) {
+				seminars.push({
+					googleCalendarId: data_seminars[i].gcal,
+					editable: false,
+					id: i,
+					color: colors[i]
+				})
+			};
+
+			$('#calendar').fullCalendar({
+				googleCalendarApiKey: 'AIzaSyDt0H-J3Xb8acqtNdg9DDQW-0F0gI-5wqU',
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,listMonth'
+				},
+				weekends: false,
+				businessHours: true,
+				fixedWeekCount: false,
+				eventSources: seminars,
+				eventClick: function(event) {
+					if (event.url) {
+					  return false;
+					}
+				},
+				eventRender: function(event, element) {
+					element.qtip({
+						content: {
+							text: event.description + '<br><br>' + ' Location: '.bold() + event.location
+						},
+			        	hide: {
+			            	fixed: true,
+			            	delay: 300
+			        	},
+						style: {
+			            	classes: 'qtip-bootstrap qtip-font',
+				        }
+					});
+				}
+			});
+
+			for (var i = 0; i <= data_seminars.length - 1; i++) {
+				$('#legend_list').append("<li style='background-color:"+colors[i]+"'><input class='box' type='checkbox' checked='checked' id=box_"+i+"><a href=#calendar class='seminar show' id="+i+" style='text-decoration:none; color:black'>"+data_seminars[i].name+"</a></li>");
+			}
+
+			$('.seminar').click(function(){
+				if($(this).hasClass('show')){
+					$('#calendar').fullCalendar('removeEventSource',seminars[$(this).attr('id')]);
+					$(this).removeClass('show');
+					$(this).prev().prop('checked',false);
+				}
+				else{
+					$('#calendar').fullCalendar('addEventSource',seminars[$(this).attr('id')]);
+					$(this).addClass('show');
+					$(this).prev().prop('checked',true);
+				}
+			});
+
+
+			$('.box').click(function(){
+				var seminar_id = $(this).attr('id').substring(4);
+				if($(this).is(':checked')){
+					$('#calendar').fullCalendar('addEventSource',seminars[seminar_id]);
+				}
+				else{
+					$('#calendar').fullCalendar('removeEventSource',seminars[seminar_id]);
+
+				}
+			});	
+		});
+		</script>
+		
+		<style>
+		  html, body {
+			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+			font-size: 14;
+		  }
+		  #container {
+		  	padding:5%;
+		  }	
+		  #calendar {
+		  	width: 75%;
+		  	max-height: 5%;
+		  }
+		  #legend {
+		  	float: right;
+		  }
+		  #legend ul{
+		  	list-style: none;
+		  }
+		  #legend li{
+		  	padding: 3px;
+		  	margin: 2px;
+		  	border-radius: 4px;
+		  }
+		  .qtip-font { font-size: 12; }
+
+		</style>
+<style>
+.borderexample
+{
+border-style:solid;
+border-color:#287EC7;
+}
+
+.borderfull
+{
+border-style:none;
+background-color: #5DADE2;
+}
+</style>
+</head>
+<body>
+<br>
+
+
+<h1 align="center" class="borderexample">London Analysis and Probability Seminar</h1>
+
+<p>The London Analysis and Probability seminar is jointly organized  and is alternately held by 
+<a href="http://www3.imperial.ac.uk/">Imperial College London</a>,  
+<a href="http://www.kcl.ac.uk/">King's College London</a>,  <a href="http://www.qmul.ac.uk/">Queen Mary, University of London</a>  and  <a href="http://www.ucl.ac.uk/">University College London</a>.  The seminar meets during term time on Thursdays from 3:00 - 5:30 PM.  Please follow the links below for the details of how to get to the institutions.  All are welcome to attend the meetings.</p>
+
+<p> <i> For questions regarding the website, to be added to the London Analysis mailing list or to circulate information, please email <a href="mailto:london.analysis@gmail.com "> london.analysis@gmail.com</a>. </i></p>
+
+<div style="float: left; width: 25%;">
+<ul id="custmolist">
+<li><a href="#programme">Seminar programme</a> </li>
+</ul>
+</div>
+<div style="float: left; width: 25%;">
+<ul>
+<li><a href="#organisers">Organisers</a></li>
+</ul>
+</div>
+<div style="float: left; width: 25%;">
+<ul>
+<li><a href="#directions">Directions</a> </li>
+</ul>
+</div>
+<div style="float: left; width: 25%;">
+<ul>
+<li><a href="#calendar">London Seminars</a></li>
+</ul>
+</div>
+<br>
+<br>
+
+<hr>
+
+<h2 class="borderfull" align="center"><a name="programme"></a>Seminar Programme</h2>
+
+
+
+<h3>2021 Summer Term Programme:</h3>
+
+The 2021 Summer Term London Analysis seminar will take place via Zoom at 3PM. <a href="
+https://ucl.zoom.us/j/2688663795"> Join Zoom Meeting.</a> Please email:
+<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#111;&#110;&#100;&#111;&#110;&#46;&#97;&#110;&#97;&#108;&#121;&#115;&#105;&#115;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#108;&#111;&#110;&#100;&#111;&#110;&#46;&#97;&#110;&#97;&#108;&#121;&#115;&#105;&#115;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a> for the password. <br><br><br>
+
+
+<strong> 29 April 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> David Seifert (Newcastle University)
+    <em> Resolvent estimates and rates of decay of operator semigroups </em>  <a  ><a href="./abstracts/Seifert_290421.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+
+<strong> 6 May 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Steve Lester (KCL)
+    <em> Lattice points on hyperbolic circles</em>  <a  ><a href="./abstracts/Lester_060521.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 13 May 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Wencai Liu (TAMU)
+    <em> Irreducibility of the Fermi variety for discrete periodic Schr\"odinger operators and  its applications </em>  <a  ><a href="./abstracts/Liu_130521.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+<strong> 20 May 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Nicolas Burq (Orsay)
+    <em> Microlocal analysis of singular measures</em>  <a  ><a href="./abstracts/Burq_200521.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 27 May 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Alexandru Ionescu (Princeton)
+    <em> On the global regularity for the Einstein-Klein-Gordon coupled
+system</em>  <a  ><a href="./abstracts/Ionescu_270521.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 3 June 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Catalin Badea (Lille)
+    <em>Analytic properties of sets of integers </em>  <a  ><a href="./abstracts/Badea_030621.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 10 June 2021, 4-5 PM, NOTE CHANGE IN TIME</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>4pm  (NOTE CHANGE IN TIME)</strong> Lingrui Ge (UCI)
+    <em>Quantitative almost reducibility and its spectral applications </em>  <a  ><a href="./abstracts/Ge_100621.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 17 June 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Alexis Drouot (University of Washington)
+    <em>Dirac equations at the core of topological insulators </em>  <a  ><a href="./abstracts/Drouot_170621.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 24 June 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Jacob Christiansen (Lund)
+    <em>Chebyshev polynomials </em>  <a  ><a href="./abstracts/Christiansen_240621.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+<strong> 1 July 2021, 3-4 PM</strong>  <a href="
+https://ucl.zoom.us/j/2688663795"> Zoom</a> 
+<ul>
+    <li>
+    <strong>3pm </strong> Eugen Bogomolny (Paris Saclay)
+    <em> Spectral statistics of low-complexity matrices</em>  <a  ><a href="./abstracts/Bogomolny_010721.html">abstract</a></a> 
+    </li>
+    
+
+</ul>
+
+</ul>
+
+
+
+<br>
+Old seminar programmes: </h4> <a href="http://www.london-analysis-seminar.org.uk/legacy/programmes.html">click here</a> <br>
+
+
+<br>
+<br>
+
+<hr>
+<h2 class="borderfull" align="center"><a name="organisers"></a>Organisers</h2>
+<p><a href="http://www.ucl.ac.uk/~ucahalk/">J. Galkowski</a> (UCL) 020-7679-8081 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#46;&#103;&#97;&#107;&#111;&#119;&#115;&#107;&#105;&#64;&#117;&#99;&#108;&#46;&#97;&#99;&#46;&#117;&#107;">&#106;&#46;&#103;&#97;&#108;&#107;&#111;&#119;&#115;&#107;&#105;&#64;&#117;&#99;&#108;&#46;&#97;&#99;&#46;&#117;&#107;</a> </p>
+<p><a href="http://www.maths.qmul.ac.uk/~ig/">I. Goldsheid</a> (QMUL) 020-7882-5473 <a href="mailto:i.goldsheid%40qmw.ac.uk"> i.goldsheid@qmw.ac.uk</a> </p>
+<p><a href="http://www.imperial.ac.uk/people/i.krasovsky">I. Krasovsky</a> (IC)  020 7594 8525 <a href="mailto:i.krasovsky@imperial.ac.uk"> i.krasovsky@imperial.ac.uk</a> </p>
+<p><a href="http://www.ucl.ac.uk/~ucahlep/">L. Parnovski</a> (UCL) 020-7679-2847 <a href="mailto:l.parnovski%40ucl.ac.uk"> l.parnovski@ucl.ac.uk</a> </p>
+<p><a href="http://www.mth.kcl.ac.uk/staff/a_pushnitski.html">A. Pushnitski </a>(KCL) 020-7848-1167 <a href="mailto:alexander.pushnitski%40kcl.ac.uk"> alexander.pushnitski@kcl.ac.uk</a> </p>
+
+<br>
+<hr>
+
+
+<h2 class="borderfull" align="center">Useful information</h2>
+
+
+<h3><a name="directions"><a name="directions"></a>Directions</h3>
+
+&rarr; <a href="https://www.ucl.ac.uk/maths/contact/how-find-us">Getting to UCL - Department of Mathematics</a> <br><br>
+
+&rarr; <a href="https://www.imperial.ac.uk/visit/campuses/south-kensington/">Getting to Imperial College - Department of Mathematics</a> (Follow directions to Huxley Building) <br><br> 
+
+&rarr; <a href="https://www.kcl.ac.uk/nms/depts/mathematics/about/findus.aspx">Getting to King's College - Department of Mathematics</a>  <br><br>
+
+&rarr; <a href="http://www.maths.qmul.ac.uk/~pjc/directions.html">Getting to Queen Mary - Department of Mathematics</a>  <br><br>
+
+
+<div style="float: left; width: 50%;">
+<h3>Other analysis seminars:</h3>
+<p><a href="http://www.london-analysis-seminar.org.uk/Paris-London/">Paris-London analysis seminar</a> </p>
+<p><a href="https://www.imperial.ac.uk/pure-analysis-and-pdes/seminars/">Regular Analysis Seminars at Imperial College</a> </p>
+<p><a href="https://www.imperial.ac.uk/pure-analysis-and-pdes/seminars/jas/">Imperial Junior Analysis Seminar</a> </p>
+<p><a href="https://nms.kcl.ac.uk/alexander.pushnitski/kcl-seminar/index.html">King's College Analysis Seminar</a> </p>
+<p><a href="https://nms.kcl.ac.uk/probability/events.php?pastFuture=forthcoming">London Probability Seminar at King's</a> </p>
+<p><a href="https://www.qmul.ac.uk/maths/research/seminars/probability-and-applications/">Probability and Applications at QMUL</a> </p>
+<br>
+<br>
+</div>
+<vr>
+<div style="float: right; width: 50%;">
+<h3>Links:</h3>
+<p><a href="http://www.ma.hw.ac.uk/uk_maths.html"> U.K. Mathematics Departments, Centres, and research laboratories</a> </p>
+<p><a href="http://www.lms.ac.uk/">The London Mathematical Society</a> </p>
+<p><a href="http://www.ams.org/mathscinet/">MathSciNet</a> </p>
+<p><a href="http://www3.imperial.ac.uk/puremaths/research/analysis">Analysis group at Imperial College</a> </p>
+<p><a href="http://www.kcl.ac.uk/nms/depts/mathematics/research/Analysis/Analysis.aspx"> Analysis group at King's College</a>
+<p style="color:#FFFFFF"> . </p>
+<br>
+<br>
+</div>
+
+
+<div>
+</div>
+
+<br>
+<br>
+<br>
+<hr>
+
+<h2 id="mytitlesection"  align="center"><a name="calendar"></a>London Seminars</h2>
+		<div id="container">
+			<div id="calendar"></div>
+			<div id="legend">
+				<ul id="legend_list"></ul>
+			</div>
+
+		</div>
+<style>
+  .bottom-three {
+     margin-bottom: 15cm;
+  }
+</style>
+<div>
+</div>
+
+
+<br> 
+<br>
+<br>
+
+
+<p class="bottom-three">
+</p>
+
+
+</body></html>
