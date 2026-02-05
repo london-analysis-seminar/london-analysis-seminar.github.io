@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rigidity results for the capillary overdetermined problem</title>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.55; margin: 0; }
+    main { max-width: 900px; margin: 48px auto; padding: 0 20px; }
+    h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+    p  { font-size: 1.05rem; }
+  </style>
+
+  <!-- MathJax (loads from CDN) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        packages: { '[+]': ['ams'] }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+<main>
+  <h1>Rigidity results for the capillary overdetermined problem</h1>
+
+  <p>
+    In this talk we will discuss some rigidity results for bounded positive
+    solutions of the general capillary overdetermined problem:
+  </p>
+
+  \[
+  \begin{cases}
+  \operatorname{div}\!\left(\dfrac{\nabla u}{\sqrt{1+|\nabla u|^2}}\right) + f(u) = 0
+  & \text{in } \Omega \subset \mathbb{R}^n,\\[6pt]
+  u = 0 & \text{on } \partial\Omega,\\
+  \partial_\nu u = \text{const.} & \text{on } \partial\Omega.
+  \end{cases}
+  \]
+
+  <p>
+    Our main theorem states that in dimension \(2\), under some natural assumptions
+    on the function \(f\) and the boundedness of \(|\nabla u|\), the existence of a
+    solution of the previous problem in a domain \(\Omega\) diffeomorphic to a half-space
+    implies that \(\Omega\) is a half-space and \(u\) is a one-dimensional function.
+    We also prove the boundedness of the gradient of the solution when \(f'(u) &lt; 0\).
+    With this, our results have an interesting physical application to the classical
+    capillary overdetermined problem, i.e., the case where \(f\) is linear. This is a
+    joint work with Y. Lian.
+  </p>
+</main>
+</body>
+</html>
